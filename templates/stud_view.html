@@ -1,0 +1,161 @@
+{% extends 'stud_header.html'%}
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static',filename='job_css/custom-bs.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='job_css/jquery.fancybox.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='job_css/bootstrap-select.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='job_fonts/icomoon/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='job_fonts/line-icons/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='job_css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='job_css/animate.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='job_css/style.css') }}">
+
+
+{% for companyName,
+logo,jobTitle,jobLoc,jobType,publishedOn,salary,applicationDeadline,JobDescription,Responsibilities,Education_Experience,OtherBenifits
+in lst %}
+
+<!-- <section class="site-section" style="font-size: 40px;"></section> -->
+<section class="site-section">
+  <div class="container">
+    <div class="alert alert-success text-center" for="alert">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <h3>{{ message }}</h3>
+      {% endfor %}
+      {% else %}
+      <h3>Fill below form to apply this profile.</h3>
+      {% endif %}
+      {% endwith %}
+    </div>
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-8 mb-4 mb-lg-0">
+        <div class="d-flex align-items-center">
+          <div class="border p-2 d-inline-block mr-3 rounded">
+            <img src="{{logo}}" width="100px" height="100px" alt="Image">
+          </div>
+          <div>
+            <h2>{{jobTitle}}</h2>
+            <div>
+              <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span>{{companyName}}</span>
+              <span class="m-2"><span class="icon-room mr-2"></span>{{jobLoc}}</span>
+              <span class="m-2"><span class="icon-clock-o mr-2"></span><span
+                  class="text-primary">{{jobType}}</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="mb-5">
+          <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Job
+            Description</h3>
+          <p>{{JobDescription}}</p>
+        </div>
+        <div class="mb-5">
+          <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span
+              class="icon-rocket mr-3"></span>Responsibilities</h3>
+          <ul class="list-unstyled m-0 p-0">
+            <li class="d-flex align-items-start mb-2"><span
+                class="icon-check_circle mr-2 text-muted"></span><span>{{Responsibilities}}</span></li>
+          </ul>
+        </div>
+
+        <div class="mb-5">
+          <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-book mr-3"></span>Education +
+            Experience</h3>
+          <ul class="list-unstyled m-0 p-0">
+            <li class="d-flex align-items-start mb-2"><span
+                class="icon-check_circle mr-2 text-muted"></span><span>{{Education_Experience}}</span></li>
+          </ul>
+        </div>
+
+        <div class="mb-5">
+          <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-turned_in mr-3"></span>Other
+            Benifits</h3>
+          <ul class="list-unstyled m-0 p-0">
+            <li class="d-flex align-items-start mb-2"><span
+                class="icon-check_circle mr-2 text-muted"></span><span>{{OtherBenifits}}</span></li>
+          </ul>
+        </div>
+
+        <div class="mb-5">
+          <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-turned_in mr-3"></span>Apply
+            for job</h3>
+          <small>(All fields are mandetory*)</small>
+          <br>
+          <form action="/applyjob" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+              <label for="inputEmail4">Company Name</label>
+              <input type="text" class="form-control" name="companyName" value="{{companyName}}"
+                id="inputEmail4" required readonly>
+            </div>
+            
+            <div class="form-group">
+              <label for="inputEmail4">Job Title</label>
+              <input type="text" class="form-control" name="jobTitle" value="{{jobTitle}}"
+                id="inputEmail4" required readonly>
+            </div>
+            
+            {% for final_labels,final_studinfo in formfields %}
+            <div class="form-group">
+              <label for="inputEmail4">{{final_labels}}</label>
+              <input type="text" class="form-control" name="{{final_labels}}" value="{{final_studinfo}}"
+                id="inputEmail4" required readonly>
+            </div>
+            {% endfor %}
+
+            <div class="form-group">
+              <label class="custom-file-label">Upload Resume</label>
+              <input type="file" name="stud_resume" accept="application/pdf" class="form-control" id="inputEmail4" required>
+            </div>
+            <br>
+
+            {% if res2 == "Selected" %}
+            <button type="submit" class="btn btn-primary" disabled>Apply now</button>
+            <p style="color: red;">Selected Students can't apply to any company*</p>
+            {% elif res2 == "applied" %}
+            <button type="submit" class="btn btn-primary" disabled>Apply now</button>
+            <p style="color: red;">You have already applied to this company*</p>
+            {% else %}
+            <button type="submit" class="btn btn-primary">Apply now</button>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="bg-light p-3 border rounded mb-4">
+          <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
+          <ul class="list-unstyled pl-3 mb-0">
+            <li class="mb-2"><strong class="text-black">Published on:</strong> {{publishedOn}}</li>
+            <li class="mb-2"><strong class="text-black">Employment Status:</strong> {{jobType}}</li>
+            <li class="mb-2"><strong class="text-black">Job Location:</strong> {{jobLoc}}</li>
+            <li class="mb-2"><strong class="text-black">Salary:</strong> {{salary}}</li>
+            <li class="mb-2"><strong class="text-black">Gender:</strong> Any</li>
+            <li class="mb-2"><strong class="text-black">Application Deadline:</strong> {{applicationDeadline}}</li>
+          </ul>
+        </div>
+
+        <div class="bg-light p-3 border rounded">
+          <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Share</h3>
+          <div class="px-3">
+            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>
+            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
+            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>
+            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-pinterest"></span></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+
+
+{% endblock %}

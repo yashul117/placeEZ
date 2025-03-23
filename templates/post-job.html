@@ -1,0 +1,195 @@
+{% extends 'header.html'%}
+{% block content %}
+
+
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="../static/job_css/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<!-- 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script> -->
+
+
+<br>
+<section class="site-section">
+  <div class="container">
+    <div class="alert alert-success text-center" role="alert">
+      {{msg}}
+    </div>
+    <div class="row mb-5">
+      <div class="col-lg-12">
+        <form action="/postjob" class="p-4 p-md-5 border rounded" method="POST" enctype="multipart/form-data">
+          <h3 class="text-black mb-5 border-bottom pb-2">Job Details</h3>
+          <br>
+
+          <div class="row">
+            <div class="col">
+              <label for="job-title"><b>Job Title</b></label>
+              <input type="text" name="jtitle" class="form-control" id="job-title" placeholder="Job Title" required>
+            </div>
+            <br>
+
+            <div class="col">
+              <label for="job-type"><b>job Type</b></label>
+              <input type="text" name="jobType" class="form-control" id="job-title" placeholder="Job Type" required>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="form-group">
+              <label for="inputState"><b>Job Location</b></label>
+              <input type="text" name="jloc" class="form-control" id="job-title" placeholder="Job Location" required>
+            </div>
+            <br>
+
+            <div class="form-group">
+              <label for="job-region"><b>Branch</b></label>
+              <select id="inputState" class="form-control round-boarder selectpicker" name="branch"
+                data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region" required>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Computer science">Computer science</option>
+                <option value="Electronics ">Electronics</option>
+              </select>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="form-group">
+              <label for="job-description"><b>Job Description</b></label>
+              <textarea name="jd" class="form-control" id="job-title" cols="30" rows="10" placeholder="Job Description"
+                required></textarea>
+            </div>
+            <br>
+          </div>
+
+
+          <div class="row">
+            <div class="col">
+              <label for="company-name"><b>Salary</b></label>
+              <input type="text" class="form-control" name="Salary" id="company-name" placeholder="Salary" required>
+            </div>
+            <br>
+            <div class="col">
+              <label for="inputState"><b>student info</b></label>
+              <select id="inputState" class="selectpicker round-boarder" name="studinfo" data-style="btn-black"
+                data-width="100%" data-live-search="true" multiple required>
+                <option value="fname">Student First Name</option>
+                <option value="lname">Student Last Name</option>
+                <option value="fathername">Father Name </option>
+                <option value="mothername">Mother Name </option>
+                <option value="curntLoc">Current Location </option>
+                <option value="Hometown">Hometown Location</option>
+                <option value="achivmnt">Achievements</option>
+                <option value="skil">Skills</option>
+                <option value="certif">Certification Courses </option>
+                <option value="clgname">College Name</option>
+                <option value="rolno">Roll Number</option>
+                <option value="pEmail">Personal Email</option>
+                <option value="phnno">Phone Number</option>
+                <option value="brnch">Branch</option>
+                <option value="degre">Degree</option>
+                <option value="cgpa">Cgpa</option>
+                <option value="percent10">10th Percentage</option>
+                <option value="percent12">12th Percentage</option>
+                <option value="actbacklog">Active Backlogs</option>
+              </select>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="form-group">
+              <label for="company-name"><b>Application Deadline</b></label>
+              <input type="date" class="form-control" name="deadline" id="company-name"
+                placeholder="Application Deadline" required>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <h3 class="text-black my-5 border-bottom pb-2"><b>Company Details</b></h3>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="form-group">
+              <label for="company-name"><b>Company Name</b></label>
+              <input type="text" class="form-control" name="cmpname" id="company-name" placeholder="Company Name"
+                required>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="form-group">
+              <label for="job-description"><b>Responsibilities</b></label>
+              <textarea name="resp" class="form-control" id="job-title" cols="30" rows="10"
+                placeholder="Responsibilities" required></textarea>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="form-group">
+              <label for="job-description"><b>Education & Experience</b></label>
+              <textarea name="eduexp" class="form-control" id="job-title" cols="30" rows="10"
+                placeholder="Education & Experience" required></textarea>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="form-group">
+              <label for="job-description"><b>Other Benifits</b></label>
+              <textarea name="benif" class="form-control" id="job-title" cols="30" rows="10"
+                placeholder="Other Benifits" required></textarea>
+            </div>
+          </div>
+          <br>
+
+          <!-- <div class="form-group">
+              <label for="company-website-tw d-block">Upload Logo</label> <br>
+              <label class="btn btn-primary btn-md btn-file">
+                Browse File<input name="logo" type="file" hidden>
+              </label>
+            </div> -->
+
+          <div class="row">
+            <div class="mb-3">
+              <label for="formFile" class="form-label"><b>Company logo</b></label>
+              <input class="form-control" name="logo" type="file" id="formFile" required>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="row align-items-center mb-5">
+              <div class="col-lg-4 ml-auto">
+                <div class="row">
+                  <div class="col-6">
+                    <button type="submit" class="btn btn-block btn-primary btn-md">Save Job</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<script>
+  $(document).ready(function () {
+    $('.selectpicker').selectpicker();
+  })
+</script>
+
+{% endblock %}

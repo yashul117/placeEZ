@@ -1,0 +1,28 @@
+{% extends 'header.html'%}
+{% block content %}
+
+<br>
+<div class="container">
+  <div style="margin-left: 380px;">
+    <b>
+      <h2>Update student details</h2>
+    </b>
+  </div>
+  <br>
+  <form action="/updateinfo" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label class="form-label" for="customFile">Upload file</label>
+      <input type="file" class="form-control" name="infofile"
+        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+        id="customFile" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<br>
+<div class="alert alert-success text-center" for="alert">
+  {{msg}}
+</div>
+<br>
+
+{% endblock %}

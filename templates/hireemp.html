@@ -1,0 +1,59 @@
+{% extends 'header.html'%}
+{% block content %}
+
+<br>
+<div class="container">
+    <div style="margin-left: 380px;">
+        <b><h2>Candidate list </h2></b>
+    </div>
+    <br>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Company Name</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Category 1</th>
+            <th scope="col">Category 2</th>
+            <th scope="col">Category 3</th>
+            <th scope="col">Category 4</th>
+            <th scope="col">Category 5</th>
+            <th scope="col">Category 6</th>
+            <th scope="col">Category 7</th>
+            <th scope="col">Category 8</th>
+            <th scope="col">Category 9</th>
+          </tr>
+        </thead>
+        {% for cmpName,Jobtitle,fname,lname,cat1,cat2,cat3,cat4,cat5,cat6,cat7,cat8,cat9,status in lst2 %}
+        <tbody>
+          <tr>
+            <td>{{cmpName}}</td>
+            <td>{{Jobtitle}}</td>
+            <td>{{fname}}</td>
+            <td>{{lname}}</td>
+            <td>{{cat1}}</td>
+            <td>{{cat2}}</td>
+            <td>{{cat3}}</td>
+            <td>{{cat4}}</td>
+            <td>{{cat5}}</td>
+            <td>{{cat6}}</td>
+            <td>{{cat7}}</td>
+            <td>{{cat8}}</td>
+            <td>{{cat9}}</td>
+            <td>
+              {% if status=="applied" %}
+              <a href="/hiring?Fname={{ufname}}&Lname={{lname}}&emaill={{email}}&CmpName={{cmpName}}&jobProfile={{Jobtitle}}" class="btn btn-success" type="button">{{status}}</a>
+              {% else %}
+              <button type="button" class="btn btn-success"><span>&#10003</span> Selected</button>
+              {% endif %}
+            </td>
+          </tr>
+        </tbody>
+    {% endfor %}
+
+      </table>
+    </div>
+<br>
+
+{% endblock %}
